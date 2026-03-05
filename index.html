@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be Together, Apart</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #001613;
+    --mint: #D1F4EE;
+    --periwinkle: #7279FE;
+    --peach: #FFB9F2;
+    --orange: #FF6A3D;
+    --lime: #DAFE80;
+    --cream: #FFF3D1;
+    --white: #ffffff;
+    --muted: #8a9b97;
+    --magenta: #D643CC;
+    --olive: #374711;
+    --lavender: #B8BAFF;
+    --golden: #FFBE00;
+    --coral: #FF5D56;
+    --amber: #E98725;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--dark);
+    color: var(--mint);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mix-blend-mode: difference;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+
+  .nav-cta {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark);
+    background: var(--mint);
+    padding: 10px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    mix-blend-mode: normal;
+  }
+
+  .nav-cta:hover {
+    background: var(--periwinkle);
+    color: var(--white);
+    transform: scale(1.05);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 48px 60px;
+    position: relative;
+    overflow: visible;
+    margin-bottom: 0;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(114,121,254,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(209,244,238,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background: var(--amber);
+    border: none;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 48px;
+    animation: fadeInDown 0.8s ease both;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--dark);
+    border-radius: 50%;
+    animation: pulse-dot 2s ease infinite;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(64px, 10vw, 140px);
+    line-height: 0.95;
+    letter-spacing: -3px;
+    color: var(--mint);
+    margin-bottom: 40px;
+    animation: fadeInUp 1s ease both;
+    animation-delay: 0.4s;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--periwinkle);
+  }
+
+  .hero-sub {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.6;
+    margin-bottom: 56px;
+    animation: fadeInUp 1s ease both;
+    animation-delay: 0.4s;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    animation: fadeInUp 1s ease both;
+    animation-delay: 0.6s;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    background: var(--mint);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .btn-primary:hover {
+    background: var(--periwinkle);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px rgba(114,121,254,0.3);
+  }
+
+  .btn-secondary {
+    color: var(--muted);
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .btn-secondary:hover { color: var(--mint); }
+
+  .apple-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* FLOATING AVATARS on hero */
+  .floating-avatars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+
+  .float-avatar {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .float-avatar:nth-child(1) { top: 20%; left: 8%; animation-delay: 0s; background: #FF5D56; }
+  .float-avatar:nth-child(2) { top: 15%; right: 12%; animation-delay: 1.5s; background: var(--periwinkle); }
+  .float-avatar:nth-child(3) { bottom: 25%; left: 12%; animation-delay: 3s; background: var(--orange); }
+  .float-avatar:nth-child(4) { bottom: 20%; right: 8%; animation-delay: 0.8s; background: var(--peach); }
+  .float-avatar:nth-child(5) { top: 45%; left: 5%; animation-delay: 2.2s; background: var(--lime); }
+  .float-avatar:nth-child(6) { top: 50%; right: 6%; animation-delay: 4s; background: #00C29D; }
+
+  .menubar-clock {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    white-space: nowrap;
+    margin-left: 8px;
+    font-family: -apple-system, 'SF Pro Text', 'DM Sans', sans-serif;
+    letter-spacing: 0.2px;
+  }
+
+  /* PRODUCT SHOWCASE */
+  .showcase {
+    padding: 0 48px 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .showcase-label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .showcase-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 400;
+    letter-spacing: -2px;
+    text-align: center;
+    margin-bottom: 80px;
+    max-width: 800px;
+    line-height: 1.1;
+  }
+
+  .showcase-heading em {
+    font-style: italic;
+    color: var(--coral);
+  }
+
+  /* MENU BAR MOCK */
+  .menubar-mock {
+    width: 100%;
+    max-width: 620px;
+    position: relative;
+    animation: fadeInDown 0.8s ease both;
+    animation-delay: 0.1s;
+    z-index: 10;
+    margin-bottom: 280px;
+  }
+
+  .menubar-strip {
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(40px);
+    border-radius: 12px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+
+  .menubar-apple {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.85;
+  }
+
+  .menubar-spacer {
+    flex: 1;
+  }
+
+  .menubar-divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(255,255,255,0.15);
+    margin: 0 4px;
+  }
+
+  .menubar-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    opacity: 0.5;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .menubar-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .menubar-avatar:hover { transform: scale(1.15); }
+
+  .menubar-avatar img, .dropdown-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    transform: scale(1.6);
+    transform-origin: center 35%;
+  }
+
+  .menubar-avatar.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 8px;
+    height: 8px;
+    background: var(--lime);
+    border-radius: 50%;
+    border: 2px solid #1e1e1e;
+  }
+
+  .av-1 { }
+  .av-2 { }
+  .av-3 { opacity: 0.4; }
+  .av-4 { }
+
+  /* DROPDOWN */
+  .dropdown {
+    position: absolute;
+    top: 60px;
+    right: 56px;
+    width: 260px;
+    background: rgba(30, 30, 35, 0.96);
+    backdrop-filter: blur(40px);
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 16px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+    animation: dropdownIn 0.5s ease both;
+    animation-delay: 1s;
+    text-align: left;
+  }
+
+  .dropdown::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 64px;
+    width: 16px;
+    height: 16px;
+    background: rgba(30, 30, 35, 0.96);
+    border-left: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    transform: rotate(45deg);
+  }
+
+  .dropdown-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .dropdown-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .dropdown-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--white);
+    text-align: left;
+  }
+
+  .dropdown-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .dropdown-status {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    font-style: italic;
+    line-height: 1.5;
+    padding: 4px 0 12px;
+    text-align: left;
+  }
+
+  .dropdown-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+    margin-bottom: 10px;
+  }
+
+  .dropdown-keystrokes {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    padding-left: 48px;
+  }
+
+  .poke-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--periwinkle);
+    border: none;
+    border-radius: 10px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 14px;
+    transition: all 0.2s;
+  }
+
+  .poke-btn:hover {
+    background: #5a62e0;
+    transform: scale(1.02);
+  }
+
+  .poke-btn span:first-child { display: flex; align-items: center; gap: 8px; }
+
+  .color-dots {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .color-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .color-dot:hover { transform: scale(1.3); }
+
+  .dropdown-remove {
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .dropdown-remove:hover { color: #FF5D56; }
+
+  /* POKE SUBMENU */
+  .poke-submenu {
+    position: absolute;
+    top: 84px;
+    right: -160px;
+    width: 150px;
+    background: rgba(30, 30, 35, 0.96);
+    backdrop-filter: blur(40px);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 6px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+    animation: dropdownIn 0.4s ease both;
+    animation-delay: 1.5s;
+  }
+
+  .poke-option {
+    padding: 8px 14px;
+    font-size: 14px;
+    color: var(--white);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .poke-option:hover { background: rgba(255,255,255,0.1); }
+  .poke-option.highlighted { background: rgba(114,121,254,0.3); }
+
+  /* FEATURES */
+  .features {
+    padding: 160px 48px;
+    position: relative;
+    background: var(--lavender);
+    color: var(--dark);
+  }
+
+  .features-header {
+    text-align: center;
+    margin-bottom: 100px;
+  }
+
+  .features-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 400;
+    letter-spacing: -2px;
+    line-height: 1;
+    color: var(--dark);
+  }
+
+  .features-header h2 em {
+    color: var(--magenta);
+    font-style: italic;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .feature-card {
+    background: rgba(0,22,19,0.06);
+    border: 1px solid rgba(0,22,19,0.1);
+    border-radius: 20px;
+    padding: 40px 32px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--periwinkle);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+
+  .feature-card:hover::before { transform: scaleX(1); }
+
+  .feature-card:hover {
+    background: rgba(255,255,255,0.35);
+    transform: translateY(-4px);
+    border-color: rgba(114,121,254,0.4);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  }
+
+  .feature-emoji {
+    font-size: 36px;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .feature-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+
+  .feature-card p {
+    font-size: 14px;
+    color: rgba(0,22,19,0.6);
+    line-height: 1.7;
+    font-weight: 400;
+  }
+
+  /* POKE SECTION */
+  .pokes {
+    padding: 160px 48px;
+    text-align: center;
+    position: relative;
+    background: var(--magenta);
+    color: var(--white);
+  }
+
+  .pokes h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 400;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  .pokes h2 em {
+    color: var(--cream);
+    font-style: italic;
+  }
+
+  .pokes-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 300;
+    max-width: 500px;
+    margin: 0 auto 80px;
+    line-height: 1.6;
+  }
+
+  .poke-types {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .poke-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .poke-chip:hover {
+    transform: scale(1.08);
+  }
+
+  .poke-chip:nth-child(1) { background: rgba(255,255,255,0.15); color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
+  .poke-chip:nth-child(1):hover { background: var(--white); color: var(--magenta); animation: bounce-chip 0.5s ease; }
+
+  .poke-chip:nth-child(2) { background: rgba(255,255,255,0.15); color: var(--golden); border: 1px solid rgba(255,190,0,0.4); }
+  .poke-chip:nth-child(2):hover { background: var(--golden); color: var(--dark); animation: wiggle 0.5s ease; }
+
+  .poke-chip:nth-child(3) { background: rgba(255,255,255,0.15); color: var(--lime); border: 1px solid rgba(218,254,128,0.4); }
+  .poke-chip:nth-child(3):hover { background: var(--lime); color: var(--dark); animation: pulse-chip 0.6s ease; }
+
+  .poke-chip:nth-child(4) { background: rgba(255,255,255,0.15); color: var(--cream); border: 1px solid rgba(255,243,209,0.4); }
+  .poke-chip:nth-child(4):hover { background: var(--cream); color: var(--magenta); animation: spin-chip 0.6s ease; }
+
+  .poke-chip:nth-child(5) { background: rgba(255,255,255,0.15); color: var(--coral); border: 1px solid rgba(255,93,86,0.4); }
+  .poke-chip:nth-child(5):hover { background: var(--coral); color: var(--white); animation: jello 0.6s ease; }
+
+  .poke-chip:nth-child(6) { background: rgba(255,255,255,0.15); color: var(--lavender); border: 1px solid rgba(184,186,255,0.4); }
+  .poke-chip:nth-child(6):hover { background: var(--lavender); color: var(--dark); animation: nod 0.5s ease; }
+
+  /* CTA */
+  .cta {
+    padding: 160px 48px 120px;
+    text-align: center;
+    position: relative;
+    background: var(--olive);
+    color: var(--lime);
+  }
+
+  .cta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 8vw, 120px);
+    font-weight: 400;
+    letter-spacing: -3px;
+    line-height: 0.95;
+    margin-bottom: 40px;
+    color: var(--lime);
+  }
+
+  .cta h2 em {
+    color: var(--golden);
+    font-style: italic;
+  }
+
+  .cta-sub {
+    font-size: 18px;
+    color: rgba(218,254,128,0.6);
+    font-weight: 300;
+    margin-bottom: 48px;
+  }
+
+  .cta .btn-primary {
+    background: var(--golden);
+    color: var(--dark);
+  }
+
+  .cta .btn-primary:hover {
+    background: var(--lime);
+    color: var(--olive);
+    box-shadow: 0 20px 40px rgba(218,254,128,0.25);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 48px;
+    text-align: center;
+    border-top: 1px solid rgba(209,244,238,0.06);
+  }
+
+  footer p {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  footer a {
+    color: var(--periwinkle);
+    text-decoration: none;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-15px) rotate(3deg); }
+    66% { transform: translateY(10px) rotate(-2deg); }
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  @keyframes dropdownIn {
+    from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes bounce-chip {
+    0%, 100% { transform: scale(1.08) translateY(0); }
+    40% { transform: scale(1.08) translateY(-12px); }
+    60% { transform: scale(1.08) translateY(-4px); }
+  }
+
+  @keyframes wiggle {
+    0%, 100% { transform: scale(1.08) rotate(0); }
+    20% { transform: scale(1.08) rotate(-8deg); }
+    40% { transform: scale(1.08) rotate(8deg); }
+    60% { transform: scale(1.08) rotate(-4deg); }
+    80% { transform: scale(1.08) rotate(4deg); }
+  }
+
+  @keyframes pulse-chip {
+    0%, 100% { transform: scale(1.08); }
+    50% { transform: scale(1.18); }
+  }
+
+  @keyframes spin-chip {
+    from { transform: scale(1.08) rotate(0deg); }
+    to { transform: scale(1.08) rotate(360deg); }
+  }
+
+  @keyframes jello {
+    0%, 100% { transform: scale(1.08); }
+    30% { transform: scale(1.08) skewX(-8deg) skewY(-2deg); }
+    50% { transform: scale(1.08) skewX(5deg) skewY(1deg); }
+    70% { transform: scale(1.08) skewX(-3deg) skewY(-1deg); }
+  }
+
+  @keyframes nod {
+    0%, 100% { transform: scale(1.08) translateY(0); }
+    30% { transform: scale(1.08) translateY(6px); }
+    50% { transform: scale(1.08) translateY(0px); }
+    70% { transform: scale(1.08) translateY(4px); }
+  }
+
+  /* Scroll-reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .hero, .showcase, .features, .pokes, .cta { padding-left: 24px; padding-right: 24px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .float-avatar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Friendbar</div>
+  <a href="https://friendface-updates.s3.amazonaws.com/FriendFace.dmg" class="nav-cta">Download for Mac</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="floating-avatars">
+    <div class="float-avatar">👩‍💻</div>
+    <div class="float-avatar">🧑‍🎨</div>
+    <div class="float-avatar">👨‍🔬</div>
+    <div class="float-avatar">👩‍🚀</div>
+    <div class="float-avatar">🧑‍🎤</div>
+    <div class="float-avatar">👨‍🍳</div>
+  </div>
+
+  <!-- MENU BAR MOCK above headline -->
+  <div class="menubar-mock">
+    <div class="menubar-strip">
+      <div class="menubar-apple">
+        <svg width="14" height="17" viewBox="0 0 14 17" fill="rgba(255,255,255,0.85)"><path d="M13.16 12.95c-.32.7-.47 1.01-.88 1.63-.57.87-1.37 1.95-2.37 1.96-.89.01-1.12-.58-2.33-.57-1.2.01-1.46.58-2.35.57-1-.01-1.76-1-2.33-1.86C1.34 12.25.9 9.44 2.02 7.56c.78-1.32 2.01-2.09 3.15-2.09.99 0 1.61.59 2.43.59.79 0 1.27-.59 2.41-.59 1.01 0 2.1.62 2.88 1.68-2.53 1.39-2.12 5.01.27 5.8zM9.93 3.8c.44-.57.78-1.37.66-2.19-.72.05-1.57.51-2.06 1.11-.44.54-.81 1.35-.67 2.14.79.02 1.6-.44 2.07-1.06z"/></svg>
+      </div>
+      <div class="menubar-spacer"></div>
+      <div class="menubar-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h0M6 14h0M10 10h4M10 14h4M18 10h0M18 14h0"/></svg>
+      </div>
+      <div class="menubar-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+      </div>
+      <div class="menubar-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/></svg>
+      </div>
+      <div class="menubar-divider"></div>
+      <div class="menubar-avatar av-1 active"><img src="https://i.pravatar.cc/56?img=11" alt=""></div>
+      <div class="menubar-avatar av-2 active"><img src="https://i.pravatar.cc/56?img=32" alt=""></div>
+      <div class="menubar-avatar av-3"><img src="https://i.pravatar.cc/56?img=53" alt=""></div>
+      <div class="menubar-avatar av-4 active"><img src="https://i.pravatar.cc/56?img=68" alt=""></div>
+      <div class="menubar-divider"></div>
+      <div class="menubar-clock" id="menubar-clock"></div>
+    </div>
+
+    <!-- Dropdown -->
+    <div class="dropdown">
+      <div class="dropdown-header">
+        <div class="dropdown-avatar"><img src="https://i.pravatar.cc/150?img=68" alt=""></div>
+        <div>
+          <div class="dropdown-name">Evan</div>
+          <div class="dropdown-meta">Seen 2 min ago</div>
+        </div>
+      </div>
+
+      <div class="dropdown-status">Wait, peanuts aren't nuts??</div>
+
+      <div class="dropdown-divider"></div>
+
+      <button class="poke-btn">
+        <span>👉 Poke</span>
+        <span>›</span>
+      </button>
+
+      <div class="color-dots">
+        <div class="color-dot" style="background: #FF5D56;"></div>
+        <div class="color-dot" style="background: #F97316;"></div>
+        <div class="color-dot" style="background: #22C55E;"></div>
+        <div class="color-dot" style="background: #3B82F6;"></div>
+        <div class="color-dot" style="background: #D946EF;"></div>
+      </div>
+    </div>
+  </div>
+
+  <h1>Be<br><em>together,</em><br>apart</h1>
+
+  <p class="hero-sub">Add your friends to your macOS menu bar: set statuses, leave notes, send gifts, and poke each other!</p>
+
+  <div class="hero-cta-group">
+    <a href="https://friendface-updates.s3.amazonaws.com/FriendFace.dmg" class="btn-primary">
+      <svg class="apple-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Download for macOS
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>built by <a href="https://x.com/jwegener">Jonathan Wegener</a></p>
+</footer>
+
+<script>
+  // Live clock
+  function updateClock() {
+    const now = new Date();
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    let hours = now.getHours();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    const mins = now.getMinutes().toString().padStart(2, '0');
+    const clockStr = `${days[now.getDay()]}  ${hours}:${mins} ${ampm}`;
+    document.getElementById('menubar-clock').textContent = clockStr;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
+
+</body>
+</html>
