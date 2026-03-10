@@ -368,16 +368,16 @@
     border: 2px solid #1e1e1e;
   }
 
-  .av-1 { }
-  .av-2 { }
-  .av-3 { opacity: 0.4; }
-  .av-4 { }
+  .av-1 img { transform: scale(1.45); transform-origin: center 40%; }
+  .av-2 img { transform: scale(1.15); transform-origin: center 40%; }
+  .av-3 img { transform: scale(1.65); transform-origin: center 40%; }
+  .av-4 img { transform: scale(1.65); transform-origin: center 40%; }
 
   /* DROPDOWN */
   .dropdown {
     position: absolute;
     top: 60px;
-    right: 56px;
+    right: 71px;
     width: 260px;
     background: rgba(30, 30, 35, 0.96);
     backdrop-filter: blur(40px);
@@ -850,8 +850,8 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Friendbar</div>
-  <a href="https://friendface-updates.s3.amazonaws.com/FriendFace.dmg" class="nav-cta">Download for Mac</a>
+  <div class="nav-logo">Buddybar</div>
+  <a href="https://friendface-updates.s3.amazonaws.com/BuddyBar.dmg" class="nav-cta">Download for Mac</a>
 </nav>
 
 <!-- HERO -->
@@ -882,10 +882,10 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/></svg>
       </div>
       <div class="menubar-divider"></div>
-      <div class="menubar-avatar av-1 active"><img src="https://i.pravatar.cc/56?img=11" alt=""></div>
-      <div class="menubar-avatar av-2 active"><img src="https://i.pravatar.cc/56?img=32" alt=""></div>
-      <div class="menubar-avatar av-3"><img src="https://i.pravatar.cc/56?img=53" alt=""></div>
-      <div class="menubar-avatar av-4 active"><img src="https://i.pravatar.cc/56?img=68" alt=""></div>
+      <div class="menubar-avatar av-1"><img src="images/avatar-32-56.png" alt=""></div>
+      <div class="menubar-avatar av-2"><img src="images/avatar-11-56.png" alt=""></div>
+      <div class="menubar-avatar av-3"><img src="images/avatar-53-56.png" alt=""></div>
+      <div class="menubar-avatar av-4"><img src="images/avatar-68-56.png" alt=""></div>
       <div class="menubar-divider"></div>
       <div class="menubar-clock" id="menubar-clock"></div>
     </div>
@@ -893,7 +893,7 @@
     <!-- Dropdown -->
     <div class="dropdown">
       <div class="dropdown-header">
-        <div class="dropdown-avatar"><img src="https://i.pravatar.cc/150?img=68" alt=""></div>
+        <div class="dropdown-avatar"><img src="images/avatar-68-150.png" alt=""></div>
         <div>
           <div class="dropdown-name">Evan</div>
           <div class="dropdown-meta">Seen 2 min ago</div>
@@ -924,7 +924,7 @@
   <p class="hero-sub">Add your friends to your macOS menu bar: set statuses, leave notes, send gifts, and poke each other!</p>
 
   <div class="hero-cta-group">
-    <a href="https://friendface-updates.s3.amazonaws.com/FriendFace.dmg" class="btn-primary">
+    <a href="https://friendface-updates.s3.amazonaws.com/BuddyBar.dmg" class="btn-primary">
       <svg class="apple-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
       Download for macOS
     </a>
@@ -933,7 +933,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>built by <a href="https://x.com/jwegener">Jonathan Wegener</a></p>
+  <p>built by <a href="https://x.com/jwegener">@jwegener</a></p>
 </footer>
 
 <script>
